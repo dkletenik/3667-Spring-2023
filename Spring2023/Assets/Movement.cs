@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     [SerializeField] const int SPEED = 15;
     [SerializeField] bool isFacingRight = true;
     [SerializeField] bool jumpPressed = false;
-    [SerializeField] float jumpForce = 1000.0;
+    [SerializeField] float jumpForce = 500.0f;
     [SerializeField] bool isGrounded = true;
     // Start is called before the first frame update
     void Start()
@@ -37,6 +37,8 @@ public class Movement : MonoBehaviour
             Flip();
         if (jumpPressed && isGrounded)
             Jump();
+        else
+            jumpPressed = false;
 
         
     }
