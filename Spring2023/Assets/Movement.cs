@@ -53,14 +53,14 @@ public class Movement : MonoBehaviour
     {
         rigid.velocity = new Vector2(rigid.velocity.x, 0);
         rigid.AddForce(new Vector2(0, jumpForce));
-        Debug.Log("jumped");
+        //Debug.Log("jumped");
         jumpPressed = false;
         isGrounded = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        Debug.Log(collision.gameObject.tag);
+        //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Ground")
             isGrounded = true;
         else

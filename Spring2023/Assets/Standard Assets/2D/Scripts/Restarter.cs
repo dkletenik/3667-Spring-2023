@@ -1,22 +1,38 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 
 namespace UnityStandardAssets._2D
 {
     public class Restarter : MonoBehaviour
     {
-        private void OnTriggerEnter2D(Collider2D other)
+        [SerializeField] int lives = 3;
+        [SerializeField] Text livesText;
+
+        public void Start()
         {
-            if (other.tag == "Player")
+            DisplayLives();
+        }
+
+        private void OnCollisionEnter2D (Collision2D collision)
+        {
+            if (collision.gameObject.tag == "Player")
             {
-                SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
+                lives--;
+                Debug.Log("collided with player");
+                DisplayLives();
+
+                if (lives == 0)
+                    SceneManager.LoadScene(SceneManager.GetSceneAt(0).name);
             }
 
-            if (other.tag == "Crate")
-            {
-                Debug.Log("crate fell");
-            }
+        }
+
+        private void DisplayLives()
+        {
+            livesText.text = "Lives: " + lives;
         }
     }
 }
