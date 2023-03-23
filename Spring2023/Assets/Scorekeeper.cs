@@ -17,7 +17,7 @@ public class Scorekeeper : MonoBehaviour
     void Start()
     {
         DisplayScore();
-        level = SceneManager.GetActiveScene().buildIndex + 1; //becuase build indexing starts at 0 and we start right awy with scene1
+        level = SceneManager.GetActiveScene().buildIndex - 1 ; //becuase build indexing starts at 0 and we start right awy with scene1
         DisplayScene();
     }
 

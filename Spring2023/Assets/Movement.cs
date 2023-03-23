@@ -63,7 +63,7 @@ public class Movement : MonoBehaviour
         //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Ground")
             isGrounded = true;
-        else
-            Debug.Log(collision.gameObject.tag);
+       // else
+         //   Debug.Log(collision.gameObject.tag);
     }
 }
