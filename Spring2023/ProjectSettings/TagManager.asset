@@ -7,6 +7,8 @@ TagManager:
   - Fire
   - Crate
   - Ground
+  - ShowInPlayMode
+  - ShowInPauseMode
   layers:
   - Default
   - TransparentFX

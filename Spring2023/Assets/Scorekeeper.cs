@@ -6,18 +6,21 @@ using UnityEngine.SceneManagement;
 
 public class Scorekeeper : MonoBehaviour
 {
-    [SerializeField] int score = 0;
+    [SerializeField] int score;
     const int DEFAULT_POINTS = 1;
     [SerializeField] Text scoreTxt;
     [SerializeField] Text sceneTxt;
     int level;
-    const int SCORE_THRESHOLD = 10;
+    const int SCORE_THRESHOLD_PER_LEVEL = 10;
+    int scoreThreshold;
 
     // Start is called before the first frame update
     void Start()
     {
+        score = PersistentData.Instance.GetScore();
         DisplayScore();
         level = SceneManager.GetActiveScene().buildIndex - 1 ; //becuase build indexing starts at 0 and we start right awy with scene1
+        scoreThreshold = level * SCORE_THRESHOLD_PER_LEVEL;
         DisplayScene();
     }
 
@@ -35,10 +38,11 @@ public class Scorekeeper : MonoBehaviour
     public void AddPoints(int points)
     {
         score += points;
+        PersistentData.Instance.SetScore(score);
         Debug.Log("score: " + score);
         DisplayScore();
 
-        if (score >= SCORE_THRESHOLD)
+        if (score >= scoreThreshold)
             AdvanceScene();
     }
 
@@ -49,7 +53,7 @@ public class Scorekeeper : MonoBehaviour
 
     public void DisplayScene()
     {
-        sceneTxt.text = "Level " + level;
+        sceneTxt.text = "Welcome, " + PersistentData.Instance.GetName()  + " : Level " + level;
     }
 
     public void AdvanceScene()

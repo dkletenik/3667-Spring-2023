@@ -744,7 +744,7 @@ GameObject:
   - component: {fileID: 1240858791}
   m_Layer: 5
   m_Name: menuButton
-  m_TagString: Untagged
+  m_TagString: ShowInPauseMode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -956,7 +956,7 @@ GameObject:
   - component: {fileID: 1362901931}
   m_Layer: 5
   m_Name: resumeButtion
-  m_TagString: Untagged
+  m_TagString: ShowInPauseMode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1767,7 +1767,7 @@ GameObject:
   - component: {fileID: 2017363448}
   m_Layer: 5
   m_Name: pauseButton
-  m_TagString: Untagged
+  m_TagString: ShowInPlayMode
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
