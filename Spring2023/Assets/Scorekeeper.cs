@@ -19,7 +19,7 @@ public class Scorekeeper : MonoBehaviour
     {
         score = PersistentData.Instance.GetScore();
         DisplayScore();
-        level = SceneManager.GetActiveScene().buildIndex - 1 ; //becuase build indexing starts at 0 and we start right awy with scene1
+        level = SceneManager.GetActiveScene().buildIndex - 1; //becuase build indexing starts at 0 and we start right awy with scene1
         scoreThreshold = level * SCORE_THRESHOLD_PER_LEVEL;
         DisplayScene();
     }
@@ -27,7 +27,9 @@ public class Scorekeeper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        score = PersistentData.Instance.GetScore();
+        if (score >= scoreThreshold)
+            AdvanceScene();
     }
 
     public void AddPoints()
@@ -53,11 +55,12 @@ public class Scorekeeper : MonoBehaviour
 
     public void DisplayScene()
     {
-        sceneTxt.text = "Welcome, " + PersistentData.Instance.GetName()  + " : Level " + level;
+        sceneTxt.text = "Welcome, " + PersistentData.Instance.GetName() + " : Level " + level;
     }
 
     public void AdvanceScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
 }
