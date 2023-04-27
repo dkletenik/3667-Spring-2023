@@ -11,11 +11,20 @@ public class Movement : MonoBehaviour
     [SerializeField] bool jumpPressed = false;
     [SerializeField] float jumpForce = 500.0f;
     [SerializeField] bool isGrounded = true;
+
+    [SerializeField] Animator animator;
+
+    const int IDLE = 0;
+    const int RUN = 1;
+    const int JUMP = 2;
     // Start is called before the first frame update
     void Start()
     {
         if (rigid == null)
             rigid = GetComponent<Rigidbody2D>();
+        if (animator == null)
+            animator = GetComponent<Animator>();
+        animator.SetInteger("motion", IDLE);
         
     }
 
@@ -26,6 +35,7 @@ public class Movement : MonoBehaviour
         movement = Input.GetAxis("Horizontal");
         if (Input.GetButtonDown("Jump"))
             jumpPressed = true;
+
     }
 
     //called potentially many times per frame
@@ -38,7 +48,21 @@ public class Movement : MonoBehaviour
         if (jumpPressed && isGrounded)
             Jump();
         else
+        { 
             jumpPressed = false;
+            if (isGrounded)
+            {
+                if (movement > 0 || movement < 0)
+                {
+                    animator.SetInteger("motion", RUN);
+                }
+                else
+                {
+                    animator.SetInteger("motion", IDLE);
+                }
+            }
+            
+        }
 
         
     }
@@ -51,6 +75,7 @@ public class Movement : MonoBehaviour
 
     private void Jump()
     {
+        animator.SetInteger("motion", JUMP);
         rigid.velocity = new Vector2(rigid.velocity.x, 0);
         rigid.AddForce(new Vector2(0, jumpForce));
         //Debug.Log("jumped");
@@ -63,7 +88,8 @@ public class Movement : MonoBehaviour
         //Debug.Log(collision.gameObject.tag);
         if (collision.gameObject.tag == "Ground")
             isGrounded = true;
-       // else
-         //   Debug.Log(collision.gameObject.tag);
+        // else
+        //   Debug.Log(collision.gameObject.tag);
+        animator.SetInteger("motion", IDLE);
     }
 }
